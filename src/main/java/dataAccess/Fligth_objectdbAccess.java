@@ -1,13 +1,11 @@
 package dataAccess;
 
-import java.sql.Date;
-import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
-import javax.persistence.Persistence;
+import javax.persistence.*;
 import javax.persistence.TypedQuery;
 
 import domain.ConcreteFlight;
@@ -52,7 +50,7 @@ public class Fligth_objectdbAccess {
 		db = emf.createEntityManager();
 		System.out.println("Database ON");
 		
-		TypedQuery<String> query = db.createQuery("SELELCT DISTINCT f.departingCity FROM Flight f", String.class);
+		TypedQuery<String> query = db.createQuery("SELECT DISTINCT f.departingCity FROM Flight f", String.class);
 		List<String> result = query.getResultList();
 		close();
 		return result;
@@ -77,7 +75,7 @@ public class Fligth_objectdbAccess {
 		db = emf.createEntityManager();
 		System.out.println("Database ON");
 		// 
-		TypedQuery<ConcreteFlight> query = db.createQuery("SELELCT p FROM ConcreteFlight p WHERE  p.flight.departingCity = 1 AND p.flight.arrivingCity =? 2 AND p.date =? 3", ConcreteFlight.class);
+		TypedQuery<ConcreteFlight> query = db.createQuery("SELECT p FROM ConcreteFlight p WHERE  p.flight.departingCity =? 1 AND p.flight.arrivingCity =? 2 AND p.date =? 3", ConcreteFlight.class);
 		db.getTransaction().begin();
 		query.setParameter(1, dCity);
 		query.setParameter(2, aCity);

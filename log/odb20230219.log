@@ -1,0 +1,67 @@
+------------------------------------------------------------------------------------------------------------------------
+
+[2023-02-19 11:46:56 #1 store] 
+Database 'C:\Users\urtat\OneDrive\Escritorio\1marroia22Urtats\flightManager.odb' is opened by 13668@DESKTOP-4RLGBMM
+
+[2023-02-19 11:46:56 #2 type.registry] 
+New type domain.Flight
+
+[2023-02-19 11:46:56 #3 type] 
+Type domain.Flight is not enhanced.
+
+[2023-02-19 11:46:56 #4 type.registry] 
+New type domain.ConcreteFlight
+
+[2023-02-19 11:46:56 #5 type] 
+Type domain.ConcreteFlight is not enhanced.
+
+[2023-02-19 11:46:56 #6 type.registry] 
+New type java.util.ArrayList<java.lang.Object>
+
+[2023-02-19 11:46:57 #7 type.registry] 
+New type java.util.ArrayList<domain.ConcreteFlight>
+
+------------------------------------------------------------------------------------------------------------------------
+
+[2023-02-19 11:50:06 #1 store] 
+Database 'C:\Users\urtat\OneDrive\Escritorio\1marroia22Urtats\flightManager.odb' has been recovered (tr. 1-12)
+
+[2023-02-19 11:50:06 #2 store] 
+Database 'C:\Users\urtat\OneDrive\Escritorio\1marroia22Urtats\flightManager.odb' is opened by 22700@DESKTOP-4RLGBMM
+
+[2023-02-19 11:50:06 #3 type] 
+Type domain.Flight is not enhanced.
+
+[2023-02-19 11:50:06 #4 type] 
+Type domain.ConcreteFlight is not enhanced.
+
+------------------------------------------------------------------------------------------------------------------------
+
+[2023-02-19 11:50:54 #1 store] 
+Database 'C:\Users\urtat\OneDrive\Escritorio\1marroia22Urtats\flightManager.odb' is opened by 20188@DESKTOP-4RLGBMM
+
+[2023-02-19 11:50:54 #2 type] 
+Type domain.Flight is not enhanced.
+
+[2023-02-19 11:50:54 #3 type] 
+Type domain.ConcreteFlight is not enhanced.
+
+------------------------------------------------------------------------------------------------------------------------
+
+[2023-02-19 11:51:55 #1 store] 
+Database 'C:\Users\urtat\OneDrive\Escritorio\1marroia22Urtats\flightManager.odb' is opened by 22864@DESKTOP-4RLGBMM
+
+[2023-02-19 11:51:55 #2 type] 
+Type domain.Flight is not enhanced.
+
+[2023-02-19 11:51:55 #3 type] 
+Type domain.ConcreteFlight is not enhanced.
+
+------------------------------------------------------------------------------------------------------------------------
+
+[2023-02-19 11:52:49 #1 store] 
+Database 'C:\Users\urtat\OneDrive\Escritorio\1marroia22Urtats\flightManager.odb' is opened by 18504@DESKTOP-4RLGBMM
+
+[2023-02-19 11:52:49 #2 type] 
+Type domain.Flight is not enhanced.
+
