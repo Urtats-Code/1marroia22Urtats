@@ -1,6 +1,8 @@
 package dataAccess;
 
+import java.sql.Date;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
 import javax.persistence.EntityManager;
@@ -8,6 +10,7 @@ import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 import javax.persistence.TypedQuery;
 
+import domain.ConcreteFlight;
 import domain.Flight;
 
 public class Fligth_objectdbAccess {
@@ -15,11 +18,11 @@ public class Fligth_objectdbAccess {
 	private EntityManager db;
 	private EntityManagerFactory emf;
 	private boolean local = false;
-	private String DBName = "flightManager.odb";
+	private String fileName = "flightManager.odb";
 	
 	public Fligth_objectdbAccess()
 	{
-		emf = Persistence.createEntityManagerFactory(DBName);
+		emf = Persistence.createEntityManagerFactory(fileName);
 		db = emf.createEntityManager();
 		System.out.println("Database Open");
 	}
@@ -32,7 +35,7 @@ public class Fligth_objectdbAccess {
 	
 	public void storeFlight(Flight f) 
 	{
-		emf = Persistence.createEntityManagerFactory(DBName);
+		emf = Persistence.createEntityManagerFactory(fileName);
 		db = emf.createEntityManager();
 		System.out.println("Database ON");
 		db.getTransaction().begin();
@@ -43,32 +46,74 @@ public class Fligth_objectdbAccess {
 		close();
 	}
 	
-	public List<String> getDepartingCities(String city)
+	public List<String> getDepartingCities()
 	{
-		emf = Persistence.createEntityManagerFactory(DBName);
+		emf = Persistence.createEntityManagerFactory(fileName);
 		db = emf.createEntityManager();
 		System.out.println("Database ON");
 		
-		TypedQuery<String> query = db.createQuery("SELECT DISTINCT f.departingCity FROM Flight f", String.class);
-		query.setParameter(1, city);
-		List<String> query1 = query.getResultList();
+		TypedQuery<String> query = db.createQuery("SELELCT DISTINCT f.departingCity FROM Flight f", String.class);
+		List<String> result = query.getResultList();
 		close();
-		return query1;
+		return result;
 	}
 	
-	public List<String> getArrival(String city) {
+	public List<String> getArrivals(String city) {
 		
-		emf = Persistence.createEntityManagerFactory(DBName);
+		emf = Persistence.createEntityManagerFactory(fileName);
 		db = emf.createEntityManager();
 		System.out.println("Database ON");
 		
 		TypedQuery<String> query = db.createQuery("SELECT DISTINCT f.arrivingCity FROM Flight f WHERE f.departingCity=?1", String.class);
 		query.setParameter (1, city);
-		List<String> query1 = query.getResultList();
+		List<String> result = query.getResultList();
 		close();
-		return query1;
+		return result;
 	}
 	
+	public Collection<ConcreteFlight> getFlights(String dCity, String aCity, java.util.Date date)
+	{
+		emf = Persistence.createEntityManagerFactory(fileName);
+		db = emf.createEntityManager();
+		System.out.println("Database ON");
+		// 
+		TypedQuery<ConcreteFlight> query = db.createQuery("SELELCT p FROM ConcreteFlight p WHERE  p.flight.departingCity = 1 AND p.flight.arrivingCity =? 2 AND p.date =? 3", ConcreteFlight.class);
+		db.getTransaction().begin();
+		query.setParameter(1, dCity);
+		query.setParameter(2, aCity);
+		query.setParameter(3,date);
+		List<ConcreteFlight> result = query.getResultList();
+		close();
+		return result;
+	}
+	
+	public void  bookSeat(ConcreteFlight cFlight , String ticket) 
+	{
+		emf = Persistence.createEntityManagerFactory(fileName);
+		db = emf.createEntityManager();
+		System.out.println("Database ON");
+		
+		int num = 0;
+		db.getTransaction().begin();
+		ConcreteFlight currentConcreteFlight = db.find(ConcreteFlight.class, cFlight.getConcreteFlightCode()); // concreteFlight code-ren gakoa dakigunez find metodoa erabili dezakegu
+		// depending on the ticket type we set a different numtypes just if the given number is not negative 
+		if(ticket == "business") 
+		{
+			num = cFlight.getBusinessNumber();
+			if(num > 0) currentConcreteFlight.setBusinessNumber(num - 1);
+		}else if (ticket == "first") 
+		{
+			num = cFlight.getFirstNumber();
+			if(num > 0) currentConcreteFlight.setFirstNumber(num - 1);
+		}else if (ticket == "tourist") 
+		{
+			num = cFlight.getTouristNumber();
+			if(num > 0) currentConcreteFlight.setTouristNumber(num - 1);
+		}
+		
+		db.getTransaction().commit();
+		close();
+	}
 	
 
 }
